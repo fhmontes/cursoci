@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
+<?php echo view('templates/header'); ?>
 	<p>Hola desde hola_view.php</p>	
-</body>
-</html>
+<?php echo view('templates/footer'); ?>

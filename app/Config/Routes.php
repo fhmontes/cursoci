@@ -56,6 +56,13 @@ $routes->get('/persona/datos/(:any)/(:num)', 'PersonaController::datosAction/$1/
 // Envio de colecciones controlador - vista
 $routes->get('/persona/listar', 'PersonaController::listarAction');
 
+// RUTAS CALCULADORA
+$routes->get('/calculadora/aritmetica/(:num)/(:num)', 
+			 'CalculadoraController::aritmeticaAction/$1/$2');
+
+$routes->get('/calculadora/geometrica/(:num)/(:num)', 
+			 'CalculadoraController::geometriaAction/$1/$2');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
