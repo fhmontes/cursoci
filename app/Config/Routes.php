@@ -63,6 +63,21 @@ $routes->get('/calculadora/aritmetica/(:num)/(:num)',
 $routes->get('/calculadora/geometrica/(:num)/(:num)', 
 			 'CalculadoraController::geometriaAction/$1/$2');
 
+// USER
+$routes->add('/user', 'UserController::index');
+
+// USER PRUEBAS CRUD
+$routes->add('/user/guardar', 'UserController::guardarAction');
+$routes->add('/user/actualizar', 'UserController::actualizarAction');
+$routes->add('/user/eliminar/(:num)', 'UserController::eliminarAction/$1');
+
+$routes->add('/user/consultas/(:num)', 'UserController::consultasAction/$1');
+$routes->add('/user/consulta/sql', 'UserController::consultaSqlAction');
+
+// USER 
+$routes->get('/user/new', 'UserController::newAction');
+$routes->post('/user/create', 'UserController::createAction');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
