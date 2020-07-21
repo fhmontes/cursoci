@@ -31,6 +31,11 @@
 				   title="Editar" class="btn btn-success btn-sm">
 					<span class="fa fa-pencil"></span>
 				</a>
+
+				<a href="<?php echo base_url('user/delete/'.$user->id); ?>" 
+				   title="Eliminar" class="btn btn-danger btn-sm">
+					<span class="fa fa-trash"></span>
+				</a>
 			</td>
 		</tr>
 		<?php } ?>

@@ -81,6 +81,8 @@ $routes->post('/user/create', 'UserController::createAction');
 $routes->get('/user/edit/(:num)', 'UserController::editAction/$1');
 $routes->post('/user/update', 'UserController::updateAction');
 
+$routes->get('/user/delete/(:num)', 'UserController::deleteAction/$1');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

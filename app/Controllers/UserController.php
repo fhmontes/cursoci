@@ -185,6 +185,26 @@ class UserController extends BaseController {
 			// return $this->newAction();
 		// }
 	}
+
+	public function deleteAction($id){
+		// Instanciar model
+		$userModel = new UserModel();
+		// Buscar registro a eliminar
+		$user = $userModel->find($id);
+		if($user){
+			// Eliminar registro
+			$userModel->delete($id);
+			// Instanciar objeto session
+			$session = \Config\Services::session();
+			// Mostrar un mensaje
+			$session->setFlashdata('message', 'El usuario '.$user->username.' fue eliminado exitosamente');
+			// Redireccionar al listado
+			return redirect()->to('/user');
+		}else{
+			// Mensaje no existe
+			echo 'No existe el registro a eliminar';
+		}
+	}
 }
 
 
