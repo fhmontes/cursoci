@@ -101,16 +101,45 @@ class UserController extends BaseController {
 
 	// Guardar datos del formulario
 	public function createAction(){
-		// 1. Instanciar un objeto del modelo
-		$userModel = new UserModel();
-		// 2. Definir un objeto a guardar
-		$request = \Config\Services::request();
-		$user = $request->getPostGet();
-		// Cifrar password
-		$user['password'] = MD5($request->getPostGet('password'));
-		// 3. Guardar el registro
-		$userModel->insert($user);
-		// 4. Mostrar un mensaje
-		echo 'El usuario '.$user['username'].' fue adicionado exitosamente';
+		if($this->userCreateFormValidation()){
+			// Instanciar un objeto del modelo
+			$userModel = new UserModel();
+			// Instanciar objeto de peticion
+			$request = \Config\Services::request();
+			// Instanciar objeto session
+			$session = \Config\Services::session();
+			
+			// Obtener datos del formulario
+			$user = $request->getPostGet();
+			// Cifrar password
+			$user['password'] = MD5($request->getPostGet('password'));
+
+			// Guardar el registro en la bd
+			$userModel->insert($user);
+
+			// Mostrar un mensaje
+			// echo 'El usuario '.$user['username'].' fue adicionado exitosamente';
+			$session->setFlashdata('message', 'El usuario '.$user['username'].' fue adicionado exitosamente');
+
+			// Redireccionar al listado
+			return redirect()->to('/user');
+		} else {
+			// Mostrar mensajes de error para la validacion
+			// var_dump(\Config\Services::validation()->getErrors());
+			return $this->newAction();
+		}
+	}
+
+	private function userCreateFormValidation(){
+		$val = $this->validate(
+			// Reglas de validacion para el formulario
+			[
+				'username' => 'required|min_length[3]',
+				'password' => 'required|min_length[6]',
+				'email' => 'required|valid_email|is_unique[users.email]',
+			],
+			// Mensajes de validacion
+			[]);
+		return $val;
 	}
 }
