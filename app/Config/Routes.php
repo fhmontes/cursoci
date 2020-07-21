@@ -78,6 +78,9 @@ $routes->add('/user/consulta/sql', 'UserController::consultaSqlAction');
 $routes->get('/user/new', 'UserController::newAction');
 $routes->post('/user/create', 'UserController::createAction');
 
+$routes->get('/user/edit/(:num)', 'UserController::editAction/$1');
+$routes->post('/user/update', 'UserController::updateAction');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

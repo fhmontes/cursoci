@@ -18,6 +18,7 @@
 			<th>USUARIO</th>
 			<th>EMAIL</th>
 			<th>FECHA REGISTRO</th>
+			<th>OPCIONES</th>
 		</tr>
 		<?php foreach($users as $user) { ?>
 		<tr>
@@ -25,6 +26,12 @@
 			<td><?php echo $user->username; ?></td>
 			<td><?php echo $user->email; ?></td>
 			<td><?php echo $user->created_at; ?></td>
+			<td>
+				<a href="<?php echo base_url('user/edit/'.$user->id); ?>" 
+				   title="Editar" class="btn btn-success btn-sm">
+					<span class="fa fa-pencil"></span>
+				</a>
+			</td>
 		</tr>
 		<?php } ?>
 	</table>

@@ -142,4 +142,52 @@ class UserController extends BaseController {
 			[]);
 		return $val;
 	}
+
+	// Generar formulario para editar
+	public function editAction($id){
+		$userModel = new UserModel();
+		helper('form');
+		// Buscar registro a ditar
+		$user = $userModel->find($id);
+		$data['user'] = $user;
+		$data['title'] = 'Editar Usuario';
+		return view('user/editar_view',$data); 
+	}
+
+	// Guardar datos del formulario
+	public function updateAction(){
+		// if($this->userEditFormValidation()){
+			// Instanciar un objeto del modelo
+			$userModel = new UserModel();
+			// Instanciar objeto de peticion
+			$request = \Config\Services::request();
+			// Instanciar objeto session
+			$session = \Config\Services::session();
+			
+			// Obtener datos del formulario
+			$user = $request->getPostGet();
+			// Cifrar password
+			// $user['password'] = MD5($request->getPostGet('password'));
+
+			// Guardar el registro en la bd
+			$id = $request->getPostGet('id');
+			$userModel->update($id ,$user);
+
+			// Mostrar un mensaje
+			// echo 'El usuario '.$user['username'].' fue adicionado exitosamente';
+			$session->setFlashdata('message', 'El usuario '.$user['username'].' fue editado exitosamente');
+
+			// Redireccionar al listado
+			return redirect()->to('/user');
+		// } else {
+			// Mostrar mensajes de error para la validacion
+			// var_dump(\Config\Services::validation()->getErrors());
+			// return $this->newAction();
+		// }
+	}
 }
+
+
+
+
+
